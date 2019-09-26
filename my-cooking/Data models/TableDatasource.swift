@@ -20,13 +20,23 @@ class TableDatasource<Element>: NSObject, UITableViewDelegate, UITableViewDataSo
     var elements: [Element] = []
 
     // MAKR: - UITableViewDelegate, UITableViewDataSource
-
     func numberOfSections(in tableView: UITableView) -> Int {
         return 3
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return elements.count
+        var mode :Difficulty = .easy
+        switch section {
+        case 0:
+            mode = .easy
+        case 1:
+            mode = .normal
+        default:
+            mode = .hard
+        }
+        
+        let filtedRecpies = elements.filter{($0 as! Recipe).dificulty == mode}
+        return filtedRecpies.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -38,9 +48,19 @@ class TableDatasource<Element>: NSObject, UITableViewDelegate, UITableViewDataSo
             cell = UITableViewCell(style: .subtitle, reuseIdentifier: cellIdentifier)
         }
 
-        let element = elements[indexPath.row]
+        var mode :Difficulty = .easy
+        switch indexPath.section {
+        case 0:
+            mode = .easy
+        case 1:
+            mode = .normal
+        default:
+            mode = .hard
+        }
+        
+        let filtedRecpies = elements.filter{($0 as! Recipe).dificulty == mode}
+        let element = filtedRecpies[indexPath.row]
         configureCell(element, cell)
-
         return cell
     }
 
@@ -49,6 +69,12 @@ class TableDatasource<Element>: NSObject, UITableViewDelegate, UITableViewDataSo
 
         let element = elements[indexPath.row]
         didSelectElement(element)
+    }
+    
+    //MARK: - Private Methods
+    func getRecipes(mode:Difficulty) -> [Element] {
+        let filtedRecpies = elements.filter{($0 as! Recipe).dificulty == mode }
+        return filtedRecpies
     }
 
 }
