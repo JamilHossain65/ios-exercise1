@@ -11,31 +11,31 @@ import Foundation
 class DishesRepository {
 
     static let shared: DishesRepository = DishesRepository()
-
     // MAKR: - State
-
-    private var dishes: [Dish] = []
+    private var dishes: [Dish]  = []
+    private var recipes: [Recipe] = []
 
     // MARK: - Init
-
     init() {
-        guard let url = Bundle.main.url(forResource: "Dises", withExtension: "plist") else {
-            return
-        }
-        guard let data = try? Data(contentsOf: url) else {
-            return
-        }
-
+        guard let url = Bundle.main.url(forResource: "Dishes", withExtension: "plist") else {return}
+        guard let data = try? Data(contentsOf: url) else {return}
+        
         do {
-            //dishes = try PropertyListDecoder().decode([Dish].self, from: data)
-            //dishes = try PropertyListDecoder().decode([Dish].self, from: data)
+            recipes = try PropertyListDecoder().decode([Recipe].self, from: data)
+            let recipe:Recipe = recipes.first!
+            if let _dishes = NSArray(contentsOf: url) {
+                let _dishDic = _dishes.firstObject as? Dictionary<String, Any>
+                let result = CookingResult.itWasEdible
+                let ud = UUID(uuidString: _dishDic?["id"] as! String)
+                let dish = Dish.init(id: ud!, recipe: recipe, result: result)
+                print("dishes recipe::\(dish.recipe)")
+                dishes.append(dish)
+            }
         } catch {
             print(error)
             return
         }
     }
-
-
     // MARK: - Access
 
     /// Loads all available dishes.

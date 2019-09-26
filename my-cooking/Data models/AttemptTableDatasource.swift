@@ -1,5 +1,5 @@
 //
-//  TableDatasource.swift
+//  AttemptTableDatasource.swift
 //  my-cooking
 //
 //  Created by Vladas Drejeris on 16/09/2019.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TableDatasource<Element>: NSObject, UITableViewDelegate, UITableViewDataSource {
+class AttemptTableDatasource<Element>: NSObject, UITableViewDelegate, UITableViewDataSource {
 
     // MARK: - Dependencies
 
@@ -21,23 +21,11 @@ class TableDatasource<Element>: NSObject, UITableViewDelegate, UITableViewDataSo
 
     // MAKR: - UITableViewDelegate, UITableViewDataSource
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        var mode :Difficulty = .easy
-        switch section {
-        case 0:
-            mode = .easy
-        case 1:
-            mode = .normal
-        default:
-            mode = .hard
-        }
-
-        let filtedRecpies = elements.filter{($0 as! Recipe).dificulty == mode}
-        return filtedRecpies.count
-        //return elements.count
+        return elements.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -48,20 +36,7 @@ class TableDatasource<Element>: NSObject, UITableViewDelegate, UITableViewDataSo
         } else {
             cell = UITableViewCell(style: .subtitle, reuseIdentifier: cellIdentifier)
         }
-
-        var mode :Difficulty = .easy
-        switch indexPath.section {
-        case 0:
-            mode = .easy
-        case 1:
-            mode = .normal
-        default:
-            mode = .hard
-        }
-
-        let filtedRecpies = elements.filter{($0 as! Recipe).dificulty == mode}
-        let element = filtedRecpies[indexPath.row]
-        //let element = elements[indexPath.row]
+        let element = elements[indexPath.row]
         configureCell(element, cell)
         return cell
     }
@@ -69,20 +44,7 @@ class TableDatasource<Element>: NSObject, UITableViewDelegate, UITableViewDataSo
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
 
-        var mode :Difficulty = .easy
-        switch indexPath.section {
-        case 0:
-            mode = .easy
-        case 1:
-            mode = .normal
-        default:
-            mode = .hard
-        }
-        
-        let filtedRecpies = elements.filter{($0 as! Recipe).dificulty == mode}
-        let element = filtedRecpies[indexPath.row]
-        
-        //let element = elements[indexPath.row]
+        let element = elements[indexPath.row]
         didSelectElement(element)
     }
     

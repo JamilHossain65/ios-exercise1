@@ -55,16 +55,18 @@ class RecomendedListViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        var recommendedRecipe = repository.recommendedType
-        loadRecommendedData(difficulty: recommendedRecipe)
+        loadRecommendedData(difficulty: repository.recommendedType)
     }
 
     private func loadRecommendedData(difficulty:Any) {
         repository.recipes(withDifficulty:difficulty as! Difficulty, completion: { [weak self] (result) in
             switch result {
              case .success(let recipes):
-                self?.datasource.elements = recipes
-                self?.tableView.reloadData()
+                let randIndex = Int.random(in: 0 ... recipes.count - 1)
+                if let _recipe = recipes[randIndex] as? Recipe {
+                    self?.datasource.elements = [_recipe]
+                    self?.tableView.reloadData()
+                }
             case .failure(let error):
                 self?.handleError(error)
                 }
