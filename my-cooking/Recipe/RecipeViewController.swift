@@ -26,7 +26,7 @@ class RecipeViewController: UIViewController {
     // MARK: - State
 
     var recipe: Recipe!
-    //var recentRecipes:[Difficulty] = []
+    let recentAssume = 3
     
     // MARK: - Lifecycle
 
@@ -36,7 +36,7 @@ class RecipeViewController: UIViewController {
         display(recipe: recipe)
         
         //remove more than 2
-        if recipes.recentRecipes.count >= 3 {
+        if recipes.recentRecipes.count >= recentAssume {
             recipes.recentRecipes.removeLast()
         }
         //set difficuty type
@@ -46,7 +46,7 @@ class RecipeViewController: UIViewController {
         var tempList = recipes.recentRecipes
         
         
-        if tempList.count > 1{
+        if tempList.count > 1 {
             recipes.recommendedType = tempList.last!
             repeat {
                 if tempList.count > 1{
@@ -57,12 +57,11 @@ class RecipeViewController: UIViewController {
                             recipes.recommendedType = type
                         }
                     }
-                    
-                   //print("remove difficulty count::\(tempList.count)")
+                   print("remove difficulty::\(tempList)")
                 }
             } while tempList.count >= 2;
             
-            print("recent difficulty::\(tempList.first)")
+            print("recent difficulty::\(recipes.recommendedType)")
             
         }
         

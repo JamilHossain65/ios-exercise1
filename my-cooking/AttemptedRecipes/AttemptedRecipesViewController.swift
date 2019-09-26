@@ -18,8 +18,8 @@ class AttemptedRecipesViewController: UIViewController {
     // MARK: - Dependencies
 
     private let repository = DishesRepository.shared
-    private lazy var datasource: TableDatasource<Dish> = {
-        let datasource = TableDatasource<Dish>()
+    private lazy var datasource: AttemptTableDatasource<Dish> = {
+        let datasource = AttemptTableDatasource<Dish>()
         datasource.configureCell = { (element, cell) in
             cell.textLabel?.text = element.recipe.title
             cell.textLabel?.font = UIFont.systemFont(ofSize: 18, weight: .bold)
@@ -58,11 +58,9 @@ class AttemptedRecipesViewController: UIViewController {
 
     private func loadData() {
         repository.allDishes { [weak self] (result) in
-            
-            
-            
             switch result {
             case .success(let dishes):
+                print("dishes:::\(dishes)")
                 self?.datasource.elements = dishes
                 self?.tableView.reloadData()
             case .failure(let error):

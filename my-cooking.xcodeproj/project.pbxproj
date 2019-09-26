@@ -8,7 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		4E01201FA6F2B69F58D05990 /* Pods_my_cooking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B27AD00A78DDE6127E233C9A /* Pods_my_cooking.framework */; };
-		9F18B468233CC93F0085BDCD /* Dises.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9F18B467233CC93E0085BDCD /* Dises.plist */; };
+		8DF4229B233D0B68000A0B1D /* Dishes.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8DF4229A233D0B67000A0B1D /* Dishes.plist */; };
+		8DF4229D233D351A000A0B1D /* AttemptTableDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF4229C233D351A000A0B1D /* AttemptTableDatasource.swift */; };
 		9F83B52C233CAC1500FA72EE /* RecomendedListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F83B52B233CAC1500FA72EE /* RecomendedListViewController.swift */; };
 		B4EA5DC7E6F4D33F27966241 /* Pods_my_cookingTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB585E8893C0C9FC4A949648 /* Pods_my_cookingTests.framework */; };
 		D11A84C9232F930F0058BCF6 /* Recipes.plist in Resources */ = {isa = PBXBuildFile; fileRef = D11A84C8232F930F0058BCF6 /* Recipes.plist */; };
@@ -43,7 +44,8 @@
 
 /* Begin PBXFileReference section */
 		40CEBB43C8B2F165F5CEDD66 /* Pods-my-cooking.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-my-cooking.debug.xcconfig"; path = "Target Support Files/Pods-my-cooking/Pods-my-cooking.debug.xcconfig"; sourceTree = "<group>"; };
-		9F18B467233CC93E0085BDCD /* Dises.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Dises.plist; sourceTree = "<group>"; };
+		8DF4229A233D0B67000A0B1D /* Dishes.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Dishes.plist; sourceTree = "<group>"; };
+		8DF4229C233D351A000A0B1D /* AttemptTableDatasource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttemptTableDatasource.swift; sourceTree = "<group>"; };
 		9F83B52B233CAC1500FA72EE /* RecomendedListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecomendedListViewController.swift; sourceTree = "<group>"; };
 		A2A6FE2E3F5A79FEA420713F /* Pods-my-cooking.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-my-cooking.release.xcconfig"; path = "Target Support Files/Pods-my-cooking/Pods-my-cooking.release.xcconfig"; sourceTree = "<group>"; };
 		A5F07828AF6E764C49B29D41 /* Pods-my-cookingTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-my-cookingTests.release.xcconfig"; path = "Target Support Files/Pods-my-cookingTests/Pods-my-cookingTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -136,11 +138,11 @@
 		D13F701C232F601E0091886C /* my-cooking */ = {
 			isa = PBXGroup;
 			children = (
-				9F83B52A233CAC1500FA72EE /* RecommendedRecipes */,
 				D13F7042232F62870091886C /* Data models */,
 				D13F7041232F627A0091886C /* Repositories */,
 				D13F703F232F602F0091886C /* RecipesList */,
 				D13F7040232F60440091886C /* AttemptedRecipes */,
+				9F83B52A233CAC1500FA72EE /* RecommendedRecipes */,
 				D13F7057232F6BF80091886C /* Recipe */,
 				D13F701D232F601E0091886C /* AppDelegate.swift */,
 				D13F704F232F65280091886C /* Resources */,
@@ -191,6 +193,7 @@
 				D13F704D232F64480091886C /* CookingResult.swift */,
 				D13F7055232F69320091886C /* AppError.swift */,
 				D13F7058232F70920091886C /* TableDatasource.swift */,
+				8DF4229C233D351A000A0B1D /* AttemptTableDatasource.swift */,
 			);
 			path = "Data models";
 			sourceTree = "<group>";
@@ -203,7 +206,7 @@
 				D13F7028232F601F0091886C /* LaunchScreen.storyboard */,
 				D13F702B232F601F0091886C /* Info.plist */,
 				D13F7054232F65400091886C /* Localizable.strings */,
-				9F18B467233CC93E0085BDCD /* Dises.plist */,
+				8DF4229A233D0B67000A0B1D /* Dishes.plist */,
 				D11A84C8232F930F0058BCF6 /* Recipes.plist */,
 			);
 			path = Resources;
@@ -313,9 +316,9 @@
 				D11A84C9232F930F0058BCF6 /* Recipes.plist in Resources */,
 				D13F702A232F601F0091886C /* LaunchScreen.storyboard in Resources */,
 				D13F7052232F65400091886C /* Localizable.strings in Resources */,
-				9F18B468233CC93F0085BDCD /* Dises.plist in Resources */,
 				D13F7027232F601F0091886C /* Assets.xcassets in Resources */,
 				D13F7025232F601E0091886C /* Main.storyboard in Resources */,
+				8DF4229B233D0B68000A0B1D /* Dishes.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -409,6 +412,7 @@
 				D13F705B232F745B0091886C /* RecipeViewController.swift in Sources */,
 				D13F704C232F63170091886C /* Difficulty.swift in Sources */,
 				D13F7044232F62990091886C /* Recipe.swift in Sources */,
+				8DF4229D233D351A000A0B1D /* AttemptTableDatasource.swift in Sources */,
 				D13F704E232F64480091886C /* CookingResult.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

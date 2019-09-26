@@ -14,5 +14,4 @@ struct Dish {
     var id: UUID
     var recipe: Recipe
     var result: CookingResult
-
 }
