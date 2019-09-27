@@ -26,7 +26,7 @@ class RecipeViewController: UIViewController {
     // MARK: - State
 
     var recipe: Recipe!
-    let recentAssume = 3
+    let recentAssume = 10
     
     // MARK: - Lifecycle
 
@@ -64,12 +64,10 @@ class RecipeViewController: UIViewController {
             print("recent difficulty::\(recipes.recommendedType)")
             
         }
-        
-        
-        if recipes.recentRecipes.count > 0 {
-            //recipes.recommendedType = recipes.recentRecipes.last!
-        }
-        
+
+//        if recipes.recentRecipes.count > 0 {
+//            recipes.recommendedType = recipes.recentRecipes.last!
+//        }
     }
 
     private func display(recipe: Recipe) {

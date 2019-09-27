@@ -16,28 +16,17 @@ class TableDatasource<Element>: NSObject, UITableViewDelegate, UITableViewDataSo
     var didSelectElement: (Element) -> Void = { _ in }
 
     // MARK: - State
-
-    var elements: [Element] = []
+    
+    var elements: [Int:[Element]] = [:]
 
     // MAKR: - UITableViewDelegate, UITableViewDataSource
+    
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return elements.keys.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        var mode :Difficulty = .easy
-        switch section {
-        case 0:
-            mode = .easy
-        case 1:
-            mode = .normal
-        default:
-            mode = .hard
-        }
-
-        let filtedRecpies = elements.filter{($0 as! Recipe).dificulty == mode}
-        return filtedRecpies.count
-        //return elements.count
+        return elements[section]!.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -49,47 +38,18 @@ class TableDatasource<Element>: NSObject, UITableViewDelegate, UITableViewDataSo
             cell = UITableViewCell(style: .subtitle, reuseIdentifier: cellIdentifier)
         }
 
-        var mode :Difficulty = .easy
-        switch indexPath.section {
-        case 0:
-            mode = .easy
-        case 1:
-            mode = .normal
-        default:
-            mode = .hard
+        if let sectionElement = elements[indexPath.section] {
+            let element = sectionElement[indexPath.row]
+            configureCell(element, cell)
         }
-
-        let filtedRecpies = elements.filter{($0 as! Recipe).dificulty == mode}
-        let element = filtedRecpies[indexPath.row]
-        //let element = elements[indexPath.row]
-        configureCell(element, cell)
+        
         return cell
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-
-        var mode :Difficulty = .easy
-        switch indexPath.section {
-        case 0:
-            mode = .easy
-        case 1:
-            mode = .normal
-        default:
-            mode = .hard
-        }
-        
-        let filtedRecpies = elements.filter{($0 as! Recipe).dificulty == mode}
-        let element = filtedRecpies[indexPath.row]
-        
-        //let element = elements[indexPath.row]
+        guard let sectionElement = elements[indexPath.section] else { return }
+        let element = sectionElement[indexPath.row]
         didSelectElement(element)
     }
-    
-    //MARK: - Private Methods
-    func getRecipes(mode:Difficulty) -> [Element] {
-        let filtedRecpies = elements.filter{($0 as! Recipe).dificulty == mode }
-        return filtedRecpies
-    }
-
 }

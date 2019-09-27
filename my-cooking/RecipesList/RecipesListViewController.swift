@@ -56,14 +56,22 @@ class RecipesListViewController: UIViewController {
         repository.allRecipes { [weak self] (result) in
             switch result {
             case .success(let recipes):
-                self?.datasource.elements = recipes
+                var dataDic:[Int:[Recipe]] = [:]
+                dataDic[0] = self?.getRecipes(elements: recipes, mode: .easy)
+                dataDic[1] = self?.getRecipes(elements: recipes, mode: .normal)
+                dataDic[2] = self?.getRecipes(elements: recipes, mode: .hard)
+                self?.datasource.elements = dataDic
                 self?.tableView.reloadData()
             case .failure(let error):
                 self?.handleError(error)
             }
         }
     }
-
+    
+    private func getRecipes(elements:[Recipe],mode:Difficulty) -> [Recipe] {
+        let filtedRecpies = elements.filter{($0).dificulty == mode }
+        return filtedRecpies
+    }
     private func handleError(_ error: Error) {
         // There are no errors at the moment, therefore we don't need to implement this method.
     }

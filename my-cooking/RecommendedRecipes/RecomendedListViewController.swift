@@ -64,7 +64,7 @@ class RecomendedListViewController: UIViewController {
              case .success(let recipes):
                 let randIndex = Int.random(in: 0 ... recipes.count - 1)
                 if let _recipe = recipes[randIndex] as? Recipe {
-                    self?.datasource.elements = [_recipe]
+                    self?.datasource.elements = [0:[_recipe]]
                     self?.tableView.reloadData()
                 }
             case .failure(let error):
